@@ -7,8 +7,21 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
-    res.send('this is post mahasiswa')
+    const reqBody = req.body;
+    const npm_mahasiswa = reqBody.npm;
+    const nama_mahasiswa = reqBody.nama;
+    const mahasiswa = new Mahasiswa({
+        npm: npm_mahasiswa,
+        nama: nama_mahasiswa
+    });
+
+    mahasiswa.save()
+    .then(data => {
+        res.json(data);
+    })
+    .catch(err => {
+        res.json({ message: err});
+    })
 });
 
 module.exports = router;
