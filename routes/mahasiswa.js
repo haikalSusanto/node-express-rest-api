@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:npm', async (req, res) => {
     const npm_mahasiswa = req.params.npm;
     try {
-        const mahasiswa = await Mahasiswa.findOne({npm: npm_mahasiswa});
+        const mahasiswa = await Mahasiswa.find({npm: npm_mahasiswa});
         res.json(mahasiswa);
     } catch(err) {
         res.send(err);
@@ -24,6 +24,7 @@ router.get('/:npm', async (req, res) => {
     
 });
 
+//post mahasiswa
 router.post('/', async (req, res) => {
     const reqBody = req.body;
     const npm_mahasiswa = reqBody.npm;
@@ -38,6 +39,29 @@ router.post('/', async (req, res) => {
         res.json(savedMahasiswa);
     } catch(err) {
         res.json({message: err});
+    }
+});
+
+//delete specific mahasiswa by npm
+router.delete('/:npm', async (req,res) => {
+    const npm_mahasiswa = req.params.npm;
+    try {
+        const removedMahasiswa = await Mahasiswa.remove({npm: npm_mahasiswa});
+        res.json(removedMahasiswa);
+    } catch(err) {
+        res.json({ message: err });
+    }
+
+});
+
+//update specific mahasiswa name by npm
+router.patch('/update_nama/:npm', async (req, res) => {
+    const npm_mahasiswa = req.params.npm;
+    try {
+        const updatedMahasiswa = await Mahasiswa.updateOne({npm: npm_mahasiswa}, {$set: {nama: req.body.nama}});
+        res.json(updatedMahasiswa);
+    } catch(err) {
+        res.json({ message: err });
     }
 });
 
