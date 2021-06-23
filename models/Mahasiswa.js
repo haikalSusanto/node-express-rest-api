@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const MahasiswaSchema = mongoose.Schema({
+const MahasiswaSchema = new mongoose.Schema({
     npm: {
-        type: Number,
-        minLength: 10,
-        maxLength: 10,
-        required: true
+        type: String,
+        required: true,
+        minlength: 10,
+        maxlength: 10
     },
     nama: {
         type: String,
@@ -13,4 +13,4 @@ const MahasiswaSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Mahasiswa', MahasiswaSchema)
+module.exports = mongoose.model('Mahasiswa', MahasiswaSchema);

@@ -1,4 +1,5 @@
 const express = require('express');
+const assert = require('assert');
 const router = express.Router();
 const Mahasiswa = require('../models/Mahasiswa')
 
@@ -38,7 +39,7 @@ router.post('/', async (req, res) => {
         const savedMahasiswa = await mahasiswa.save();
         res.json(savedMahasiswa);
     } catch(err) {
-        res.json({message: err});
+        res.json({message: err.message});
     }
 });
 
